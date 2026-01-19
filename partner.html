@@ -109,6 +109,14 @@
     // Simple fade-in on load (optional enhancement)
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelector(".partner-hero").classList.add("show");
+  
+      const menuToggle = document.getElementById("menuToggle");
+  const navLinks = document.getElementById("navLinks");
+if (menuToggle && navLinks) {
+  menuToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+  });
+}
 });
 
 </script>
