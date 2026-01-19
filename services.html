@@ -284,6 +284,14 @@ data-images="
 </div>
 
 <script>
+       const menuToggle = document.getElementById("menuToggle");
+  const navLinks = document.getElementById("navLinks");
+if (menuToggle && navLinks) {
+  menuToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+  });
+}
+
   document.querySelectorAll(".hs-header").forEach(header => {
     header.addEventListener("click", () => {
       const item = header.parentElement;

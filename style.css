@@ -77,7 +77,9 @@ body {
 
 /* hero section  */
 .hero {
+  position: relative;
   min-height: 90vh;
+   overflow: hidden;
   display: flex;
   align-items: center;
 
@@ -97,31 +99,54 @@ body {
   padding: 80px 8%;
 }
 
-.hero-container {
-  max-width: 1200px;
-  margin: auto;
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  align-items: center;
-  gap: 50px;
+.hero {
+  animation: heroBgMove 20s ease-in-out infinite alternate;
 }
 
-.hero-badge {
-  display: inline-block;
-  background: rgba(194, 24, 91, 0.12);
-  color: #c2185b;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 14px;
-  margin-bottom: 20px;
-  font-weight: 600;
+@keyframes heroBgMove {
+  0% {
+    background-position: center right;
+  }
+  100% {
+    background-position: center left;
+  }
+}
+
+
+.hero-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 1;
+  animation: slowZoom 20s ease-in-out infinite alternate;
+}
+/* Dark overlay for readability */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(255, 232, 238, 0.45),
+    rgba(255, 232, 238, 0.45)
+  );
+    z-index: 2;
+}
+.hero-container {
+  position: relative;
+  z-index: 3;
 }
 
 .hero-content h1 {
-  font-size: 44px;
-  font-weight: 800;
-  color: #222;
+ font-size: 48px;
+  font-weight: 700;
   line-height: 1.2;
+  margin: 20px 0;
+  color: #2b2b2b;
+  min-height: 120px;
 }
 
 .hero-content p {
@@ -147,6 +172,46 @@ body {
   font-size: 14px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.08);
 }
+/* Hero entrance animation */
+.animate-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: heroFadeUp 0.9s ease forwards;
+}
+
+.delay-1 { animation-delay: 0.15s; }
+.delay-2 { animation-delay: 0.3s; }
+.delay-3 { animation-delay: 0.45s; }
+.delay-4 { animation-delay: 0.6s; }
+.delay-5 { animation-delay: 0.75s; }
+
+@keyframes heroFadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#type-text {
+  font-size: 52px;
+  font-weight: 800;
+  color: #111;
+  line-height: 1.2;
+}
+
+/* blinking cursor */
+#type-text::after {
+  content: "|";
+  margin-left: 6px;
+  animation: blink 1s infinite;
+  color: #b01257;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+
 
 /* HERO BUTTONS */
 .hero-buttons {
@@ -194,7 +259,6 @@ body {
   transform: translateY(-2px);
 }
 
-
 /* Mobile */
 @media (max-width: 900px) {
   .hero-container {
@@ -210,6 +274,25 @@ body {
    .hero-buttons {
     justify-content: center;
     flex-wrap: wrap;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-video {
+    display: none;
+  }
+
+  .hero {
+    background: url("./src/hero-fallback.jpg") center / cover no-repeat;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: 80vh;
+  }
+
+  .hero-video {
+    filter: brightness(0.95);
   }
 }
 
@@ -420,11 +503,13 @@ body {
 
 .how-card {
   background: #fff;
+  padding: 30px 22px;
   border-radius: 18px;
-  padding: 35px 20px;
+  text-align: center;
   box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
   position: relative;
+
 }
 
 .how-card:hover {
@@ -433,17 +518,16 @@ body {
 }
 
 .how-icon {
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(135deg, #c2185b, #ff7aa2);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #c2185b, #ff6f9c);
   color: #fff;
   font-weight: 700;
-  font-size: 22px;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 20px;
+  margin: 0 auto 15px;
 }
 
 .how-card h3 {
@@ -457,8 +541,18 @@ body {
   color: #666;
   line-height: 1.5;
 }
-
+/* Mobile tap */
+.how-card:active {
+  transform: scale(0.96);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
 /* Mobile Responsive */
+@media (max-width: 768px) {
+  .how-card {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  }
+}
 @media (max-width: 900px) {
   .how-steps {
     grid-template-columns: repeat(2, 1fr);
@@ -466,6 +560,23 @@ body {
 }
 
 @media (max-width: 500px) {
+  .how-steps {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 768px) {
+  .how-card:active {
+    transform: scale(0.96);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
+}
+@media (max-width: 992px) {
+  .how-steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
   .how-steps {
     grid-template-columns: 1fr;
   }
@@ -1024,4 +1135,104 @@ body {
   margin-top: 6px;
   color: #444;
   font-weight: 500;
+}
+/* packages page  */
+/* ===============================
+   PACKAGES SECTION
+================================ */
+
+#packages {
+  padding: 70px 8%;
+  background: #fff;
+}
+
+/* Section heading */
+#packages h2 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #b01257;
+  margin-bottom: 50px;
+  position: relative;
+}
+
+#packages h2::after {
+  content: "";
+  width: 90px;
+  height: 4px;
+  background: linear-gradient(90deg, #b01257, #f5a6c8);
+  position: absolute;
+  left: 0;
+  bottom: -12px;
+  border-radius: 10px;
+}
+
+/* Grid layout */
+#packages .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+}
+
+/* Package card */
+#packages .card {
+  background: #ffffff;
+  padding: 30px 26px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Highlight border + glow */
+#packages .highlight {
+  border: 1px solid #f3c2d9;
+}
+
+/* Decorative top strip */
+#packages .card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 6px;
+  width: 100%;
+  background: linear-gradient(90deg, #b01257, #f5a6c8);
+}
+
+/* Hover effect */
+#packages .card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 22px 45px rgba(176, 18, 87, 0.22);
+}
+
+/* Package title */
+#packages .card h3 {
+  font-size: 24px;
+  color: #b01257;
+  margin-bottom: 14px;
+}
+
+/* Package description */
+#packages .card p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Optional subtle background */
+#packages .card:hover {
+  background: linear-gradient(180deg, #fff, #fff6fa);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #packages {
+    padding: 50px 6%;
+  }
+
+  #packages h2 {
+    font-size: 28px;
+  }
 }

@@ -28,26 +28,35 @@
 </header>
 <!-- Hero Section -->
 <section class="hero">
+    <!-- Video Background -->
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="./src/backgroud-video.mp4" type="video/mp4">
+  </video>
+    <div class="hero-overlay"></div>
+
   <div class="hero-container">
 
     <!-- Left Content -->
     <div class="hero-content">
-      <span class="hero-badge">✨ Salon at Home</span>
+      <span class="hero-badge animate-up delay-1">✨ Salon at Home</span>
 
-      <h1>Salon-Quality Beauty<br>Services at Home</h1>
+     <h1>
+  <span id="type-text"></span>
+</h1>
 
-      <p>
+
+           <p class="animate-up delay-3">
         Book trusted beauty professionals and enjoy premium salon services
         without stepping out.
       </p>
 
-      <ul class="hero-points">
+      <ul class="hero-points animate-up delay-4">
         <li>✔ Verified Artists</li>
         <li>✔ Hygienic & Safe</li>
         <li>✔ Affordable Prices</li>
       </ul>
 
-      <div class="hero-buttons">
+      <div class="hero-buttons animate-up delay-5">
         <button class="btn-primary">Book Now</button>
         <button class="btn-secondary">Download App</button>
       </div>
@@ -446,20 +455,21 @@
 <script>
       const menuToggle = document.getElementById("menuToggle");
   const navLinks = document.getElementById("navLinks");
-
+if (menuToggle && navLinks) {
   menuToggle.addEventListener("click", () => {
     navLinks.classList.toggle("active");
   });
+}
 
+// carousel
+const carousel = document.getElementById("servicesCarousel");
 
-  const carousel = document.getElementById("servicesCarousel");
+if (carousel) {
   const cards = Array.from(carousel.children);
-
   const cardWidth = cards[0].offsetWidth + 20;
   let index = 0;
   let autoScroll;
 
-  // Clone first & last cards
   cards.forEach(card => {
     carousel.appendChild(card.cloneNode(true));
   });
@@ -469,7 +479,6 @@
     carousel.style.transition = "transform 0.6s ease";
     carousel.style.transform = `translateX(-${index * cardWidth}px)`;
 
-    // Reset invisibly when reaching clones
     if (index === cards.length) {
       setTimeout(() => {
         carousel.style.transition = "none";
@@ -488,9 +497,10 @@
   }
 
   startAutoScroll();
-
   carousel.addEventListener("mouseenter", stopAutoScroll);
   carousel.addEventListener("mouseleave", startAutoScroll);
+}
+
 // faq
   const faqItems = document.querySelectorAll(".faq-item");
 
@@ -502,6 +512,49 @@
       item.classList.toggle("active");
     });
   });
+
+  // auto text typing 
+document.addEventListener("DOMContentLoaded", function () {
+
+  const lines = [
+    "Salon-Quality Beauty",
+    "Services at Home"
+  ];
+
+  const typingSpeed = 80;
+  const pauseAfterTyping = 5000;
+
+  const element = document.getElementById("type-text");
+
+  let lineIndex = 0;
+  let charIndex = 0;
+
+  function typeText() {
+    if (charIndex < lines[lineIndex].length) {
+      element.innerHTML += lines[lineIndex].charAt(charIndex);
+      charIndex++;
+      setTimeout(typeText, typingSpeed);
+    } else {
+      if (lineIndex === 0) {
+        element.innerHTML += "<br>";
+        lineIndex++;
+        charIndex = 0;
+        setTimeout(typeText, typingSpeed);
+      } else {
+        setTimeout(() => {
+          element.innerHTML = "";
+          lineIndex = 0;
+          charIndex = 0;
+          typeText();
+        }, pauseAfterTyping);
+      }
+    }
+  }
+
+  typeText();
+});
+
+
 </script>
 
 
