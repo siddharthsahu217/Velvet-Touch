@@ -49,20 +49,30 @@
         Book trusted beauty professionals and enjoy premium salon services
         without stepping out.
       </p>
-<ul class="hero-points">
-<li class="vt-reveal" style="--d: 0.2s">
-  <svg class="vt-check"><path d="M5 13l4 4L19 7"/></svg>
-  <span>Verified Artists</span>
-</li>
-<li class="vt-reveal" style="--d: 0.2s">
-  <svg class="vt-check"><path d="M5 13l4 4L19 7"/></svg>
-  <span>Hygienic & Safe</span>
-</li>
-<li class="vt-reveal" style="--d: 0.2s">
-  <svg class="vt-check"><path d="M5 13l4 4L19 7"/></svg>
-    <span>Affordable Prices</span>
-</li>
-</ul>
+<div class="hero-swipe">
+  <div class="hero-swipe-track">
+    <div class="hero-pill">
+      <svg class="vt-check" viewBox="0 0 24 24">
+        <path d="M5 13l4 4L19 7"/>
+      </svg>
+      <span>Verified Artists</span>
+    </div>
+
+    <div class="hero-pill">
+      <svg class="vt-check" viewBox="0 0 24 24">
+        <path d="M5 13l4 4L19 7"/>
+      </svg>
+      <span>Hygienic & Safe</span>
+    </div>
+
+    <div class="hero-pill">
+      <svg class="vt-check" viewBox="0 0 24 24">
+        <path d="M5 13l4 4L19 7"/>
+      </svg>
+      <span>Affordable Prices</span>
+    </div>
+  </div>
+</div>
 
 
       <div class="hero-buttons animate-up delay-5">
@@ -438,10 +448,6 @@ if (menuToggle && navLinks) {
     navLinks.classList.toggle("active");
   });
 }
-
-// carousel
-
-
 // faq
   const faqItems = document.querySelectorAll(".faq-item");
 
