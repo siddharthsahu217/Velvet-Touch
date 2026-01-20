@@ -49,12 +49,21 @@
         Book trusted beauty professionals and enjoy premium salon services
         without stepping out.
       </p>
+<ul class="hero-points">
+<li class="vt-reveal" style="--d: 0.2s">
+  <svg class="vt-check"><path d="M5 13l4 4L19 7"/></svg>
+  <span>Verified Artists</span>
+</li>
+<li class="vt-reveal" style="--d: 0.2s">
+  <svg class="vt-check"><path d="M5 13l4 4L19 7"/></svg>
+  <span>Hygienic & Safe</span>
+</li>
+<li class="vt-reveal" style="--d: 0.2s">
+  <svg class="vt-check"><path d="M5 13l4 4L19 7"/></svg>
+    <span>Affordable Prices</span>
+</li>
+</ul>
 
-      <ul class="hero-points animate-up delay-4">
-        <li>✔ Verified Artists</li>
-        <li>✔ Hygienic & Safe</li>
-        <li>✔ Affordable Prices</li>
-      </ul>
 
       <div class="hero-buttons animate-up delay-5">
         <button class="btn-primary">Book Now</button>
@@ -102,46 +111,41 @@
 </section>
 
 <!-- Services -->
-<section class="services-carousel">
-  <div class="services-track">
-
-    <!-- Service Card -->
-    <div class="service-card">
-      <img src="src/facial.jpg" alt="Facial Service">
-      <p>Facial</p>
-    </div>
- <div class="service-card">
-      <img src="src/waxing/2.jpg" alt="Honey Waxing">
-      <p>Rica Waxing</p>
-    </div>
-    <div class="service-card">
-      <img src="src/makeup.jpg" alt="Makeup Service">
-      <p>Makeup</p>
-    </div>
-
-    <div class="service-card">
-      <img src="src/hair.jpg" alt="Hair Styling">
-      <p>Hair Styling</p>
-    </div>
-
-    
-    <div class="service-card">
-      <img src="src/massage.jpg" alt="Massage">
-      <p>Massage</p>
-    </div>
-    <div class="service-card">
-      <img src="src/waxing/1.jpg" alt="Honey Waxing">
-      <p>Honey Waxing</p>
-    </div>
-      <div class="service-card">
-      <img src="./src/hair/3.jpeg" alt="Hair Styling">
-      <p>Hair Coloring</p>
-    </div>
-    <!-- 🔁 Duplicate for infinite scroll -->
-      <div class="service-card">
-      <img src="src/facial.jpg" alt="Facial Service">
-      <p>Facial</p>
-    </div>
+<section class="food-carousel">
+  <div class="carousel-track">
+    <!-- Duplicate images for infinite effect -->
+    <img src="./src/facial/2.jpg"/>
+    <img src="./src/hair/1.jpg" />
+    <img src="./src/makeup/1.jpg" />
+    <img src="./src/manipedi/1.jpg" />
+    <img src="./src/waxing/1.jpg" />
+    <img src="./src/facial/3.jpg"/>
+    <img src="./src/hair/2.jpg" />
+    <img src="./src/makeup/2.png" />
+    <img src="./src/manipedi/2.jpg" />
+    <img src="./src/waxing/2.jpg" />
+    <img src="./src/facial/4.jpg"/>
+    <img src="./src/hair/3.jpeg" />
+    <img src="./src/makeup/3.jpg" />
+    <img src="./src/manipedi/3.jpg" />
+    <img src="./src/waxing/3.jpeg" />
+    <!-- duplicate -->
+  <img src="./src/facial/2.jpg"/>
+    <img src="./src/hair/1.jpg" />
+    <img src="./src/makeup/1.jpg" />
+    <img src="./src/manipedi/1.jpg" />
+    <img src="./src/waxing/1.jpg" />
+    <img src="./src/facial/3.jpg"/>
+    <img src="./src/hair/2.jpg" />
+    <img src="./src/makeup/2.png" />
+    <img src="./src/manipedi/2.jpg" />
+    <img src="./src/waxing/2.jpg" />
+    <img src="./src/facial/4.jpg"/>
+    <img src="./src/hair/3.jpeg" />
+    <img src="./src/makeup/3.jpg" />
+    <img src="./src/manipedi/3.jpg" />
+    <img src="./src/waxing/3.jpeg" />
+  </div>
 </section>
 
 
@@ -362,10 +366,19 @@
 <!-- Footer -->
 <footer class="footer">
   <div class="footer-container">
-
+ 
     <!-- Left Column -->
     <div class="footer-col brand">
 
+  <div class="footer-brand">
+   
+<img src="./src/Logo.png" alt="Velvet Touch Logo" class="footer-logo-clean">
+
+    <div class="brand-text">
+      <h3>Velvet Touch</h3>
+      <span>Premium Salon at Home</span>
+    </div>
+  </div>
       <p>
         Velvet Touch is a premium salon-at-home service, delivering
         professional beauty and wellness services at your doorstep.
@@ -427,44 +440,7 @@ if (menuToggle && navLinks) {
 }
 
 // carousel
-const carousel = document.getElementById("servicesCarousel");
 
-if (carousel) {
-  const cards = Array.from(carousel.children);
-  const cardWidth = cards[0].offsetWidth + 20;
-  let index = 0;
-  let autoScroll;
-
-  cards.forEach(card => {
-    carousel.appendChild(card.cloneNode(true));
-  });
-
-  function moveCarousel() {
-    index++;
-    carousel.style.transition = "transform 0.6s ease";
-    carousel.style.transform = `translateX(-${index * cardWidth}px)`;
-
-    if (index === cards.length) {
-      setTimeout(() => {
-        carousel.style.transition = "none";
-        index = 0;
-        carousel.style.transform = `translateX(0px)`;
-      }, 600);
-    }
-  }
-
-  function startAutoScroll() {
-    autoScroll = setInterval(moveCarousel, 2500);
-  }
-
-  function stopAutoScroll() {
-    clearInterval(autoScroll);
-  }
-
-  startAutoScroll();
-  carousel.addEventListener("mouseenter", stopAutoScroll);
-  carousel.addEventListener("mouseleave", startAutoScroll);
-}
 
 // faq
   const faqItems = document.querySelectorAll(".faq-item");
@@ -518,6 +494,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
   typeText();
 });
+
+
+  const revealEls = document.querySelectorAll(".vt-reveal");
+
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+          observer.unobserve(entry.target); // run once
+        }
+      });
+    },
+    { threshold: 0.35 }
+  );
+
+  revealEls.forEach(el => observer.observe(el));
 
 
 </script>
